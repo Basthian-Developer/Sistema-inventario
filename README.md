@@ -26,6 +26,6 @@ El proyecto realizado se basa en el uso de multiples herramientas y servicios pa
   <li>Abrir o iniciar docker</li>
   <li>En la terminal, apuntar al directorio local donde tenga almacenado el repositorio descargado</li>
   <li>Al existir un archivo docker-compose, solo debe ejecutar en la terminal el comando "docker-compose up -d"</li>
-  <li>Para verificar que funciona, usted debe ir a su navegado y utilizar la url http://localhost:8080</li>
+  <li>Para verificar que funciona, usted debe ir a su navegador y utilizar la url http://localhost:8080</li>
 </ul>
 <h6>Nota: Las credenciales existentes actualmente en el sistema son "Star" como usuario y "yoquese1234" como contraseña</h6>
