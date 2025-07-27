@@ -3,3 +3,10 @@
 <h6>Estado: En desarrollo</h6>
 
 El proyecto realizado se basa en el uso de multiples herramientas y servicios para permitir el funcionamiento de una solucion web
+
+<h3>Herramientas</h3>
+<ul>
+  <li>
+    Docker
+  </li>
+</ul>
