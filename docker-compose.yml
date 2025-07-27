@@ -1,0 +1,77 @@
+services:
+  nginx:
+    container_name: "frontend-container"
+    image: nginx:alpine
+    restart: always
+    ports: 
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./aplicacion:/var/www/html
+    networks:
+    - red-inventario
+
+  php:
+    build:
+      context: .
+      dockerfile: dockerfile.codeigniter
+    image: codeigniter-app:latest
+    container_name: "backend-container"
+    restart: always
+    volumes:
+      - ./aplicacion:/var/www/html
+    networks:
+    - red-inventario
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    networks:
+    - red-inventario
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: sistema_inventario
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_pass
+      TZ: America/Santiago
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    networks:
+    - red-inventario
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: rootpass
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+  
+  python-app:
+    build:
+      context: ./python_app
+      dockerfile: dockerfile.python
+    image: python-app:latest
+    container_name: python-backend
+    ports:
+    - "5000:5000"
+    restart: always
+    networks:
+    - red-inventario
+    volumes:
+    - ./python_app:/app
+    - ./aplicacion/documents:/app/documents
+
+volumes:
+  db_data:
+
+networks:
+  red-inventario:
+    driver: bridge

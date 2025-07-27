@@ -1,0 +1,28 @@
+# Usa una imagen base con Debian slim para evitar problemas con compilación de numpy/pandas
+FROM python:3.11-slim
+
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copia el archivo requirements.txt al contenedor
+COPY requirements.txt .
+
+ENV TZ=America/Santiago
+
+# Actualiza apt e instala dependencias para compilar pandas/numpy
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instala las dependencias de Python sin cache para evitar conflictos
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia todo el código de la app al contenedor
+COPY . .
+
+# Expone el puerto que usa Flask (ajusta si usas otro)
+EXPOSE 5000
+
+# Comando para ejecutar la aplicación
+CMD ["python", "app.py"]
