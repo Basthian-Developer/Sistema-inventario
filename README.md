@@ -21,7 +21,7 @@ El proyecto realizado se basa en el uso de multiples herramientas y servicios pa
 
 <h3>Pasos para instalación</h3>
 <ul>
-  <li>Se requiere tener instalado docker instalado</li>
+  <li>Se requiere tener instalado docker</li>
   <li>Se necesita descargar el contenido del repositorio</li>
   <li>Abrir o iniciar docker</li>
   <li>En la terminal, apuntar al directorio local donde tenga almacenado el repositorio descargado</li>
